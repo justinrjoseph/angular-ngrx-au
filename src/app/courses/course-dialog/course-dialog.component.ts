@@ -1,34 +1,12 @@
-<<<<<<< HEAD
-import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {FormBuilder, Validators, FormGroup} from "@angular/forms";
-import * as moment from 'moment';
-import {Course} from "../model/course";
-import {CoursesService} from "../services/courses.service";
-import {AppState} from "../../reducers";
-import {Store} from "@ngrx/store";
-import {Update} from "@ngrx/entity";
-import {CourseSaved} from '../course.actions';
-=======
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
->>>>>>> 1-auth
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
 
-<<<<<<< HEAD
-    constructor(
-        private store: Store<AppState>,
-        private coursesService: CoursesService,
-        private fb: FormBuilder,
-        private dialogRef: MatDialogRef<CourseDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) course:Course ) {
-=======
 import { Update } from '@ngrx/entity';
->>>>>>> 1-auth
 
 import { Course } from '../models';
 import { CoursesService } from '../services/courses.service';
@@ -77,26 +55,7 @@ export class CourseDialogComponent implements OnInit {
           id: this.courseId, changes
         };
 
-<<<<<<< HEAD
-        this.coursesService
-            .saveCourse(this.courseId, changes)
-            .subscribe(
-                () => {
-
-                    const course: Update<Course> = {
-                      id: this.courseId,
-                      changes
-                    };
-
-                    this.store.dispatch(new CourseSaved({course}));
-
-                    this.dialogRef.close();
-                }
-            );
-    }
-=======
         this._store.dispatch(new CourseSaved({ course }));
->>>>>>> 1-auth
 
         this.dialogRef.close();
       });

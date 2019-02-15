@@ -26,21 +26,12 @@
 }
 
 .spinner-container {
-<<<<<<< HEAD
-    height: 340px;
-    width: 390px;
-    position: fixed;
-    background: white;
-    margin-top: 70px;
-    z-index: 1;
-=======
   height: 340px;
   width: 390px;
   position: fixed;
   background: white;
   margin-top: 70px;
   z-index: 1;
->>>>>>> 1-auth
 }
 
 .lessons-table {
@@ -49,11 +40,7 @@
 }
 
 .spinner-container mat-spinner {
-<<<<<<< HEAD
-    margin: 95px auto 0 auto;
-=======
   margin: 95px auto 0 auto;
->>>>>>> 1-auth
 }
 
 .action-toolbar {

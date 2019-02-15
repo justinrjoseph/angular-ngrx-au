@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {User} from "../model/user.model";
-=======
 import { Injectable } from '@angular/core';
->>>>>>> 1-auth
 
 import { HttpClient } from '@angular/common/http';
 
