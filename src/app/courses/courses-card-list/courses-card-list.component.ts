@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
@@ -11,16 +11,12 @@ import { CourseDialogComponent } from '../course-dialog/course-dialog.component'
   templateUrl: './courses-card-list.component.html',
   styleUrls: ['./courses-card-list.component.css']
 })
-export class CoursesCardListComponent implements OnInit {
+export class CoursesCardListComponent {
   @Input() courses: Course[];
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {
-
-  }
-
-  editCourse(course: Course) {
+  editCourse(course: Course): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -29,7 +25,7 @@ export class CoursesCardListComponent implements OnInit {
 
     dialogConfig.data = course;
 
-    const dialogRef = this.dialog.open(CourseDialogComponent, dialogConfig);
+    this.dialog.open(CourseDialogComponent, dialogConfig);
   }
 }
 

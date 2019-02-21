@@ -30,22 +30,22 @@ import { Observable } from 'rxjs';
 export class CourseComponent implements OnInit, AfterViewInit {
   course: Course;
 
-  dataSource: LessonsDataSource;
-
   displayedColumns = ['seqNo', 'description', 'duration'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   loading$: Observable<boolean>;
 
-  constructor(private route: ActivatedRoute, private _store: Store<AppState>) {}
+  constructor(
+    public dataSource: LessonsDataSource,
+    private route: ActivatedRoute,
+    private _store: Store<AppState>
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.course = this.route.snapshot.data['course'];
 
     this.loading$ = this._store.select(lessonsLoading);
-
-    this.dataSource = new LessonsDataSource(this._store);
 
     const firstPage: PageQuery = {
       index: 0,
@@ -55,12 +55,12 @@ export class CourseComponent implements OnInit, AfterViewInit {
     this.dataSource.loadLessons(this.course.id, firstPage);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.paginator.page
       .subscribe(() => this.loadLessonsPage());
   }
 
-  loadLessonsPage() {
+  private loadLessonsPage(): void {
     const newPage: PageQuery = {
       index: this.paginator.pageIndex,
       size: this.paginator.pageSize

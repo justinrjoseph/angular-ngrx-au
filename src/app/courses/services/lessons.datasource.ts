@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
@@ -12,6 +14,7 @@ import { LessonsRequested } from '../store/actions';
 
 import { courseLessons } from '../store/selectors';
 
+@Injectable()
 export class LessonsDataSource implements DataSource<Lesson> {
   private lessonsSubject = new BehaviorSubject<Lesson[]>([]);
 

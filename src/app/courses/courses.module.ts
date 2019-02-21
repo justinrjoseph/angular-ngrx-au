@@ -78,7 +78,8 @@ export const coursesRoutes: Routes = [
   entryComponents: [CourseDialogComponent],
   providers: [
     services.CoursesService,
-    services.CourseResolver
+    services.CourseResolver,
+    services.LessonsDataSource
   ],
   exports: [
     HomeComponent,

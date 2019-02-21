@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -18,7 +18,7 @@ import { CourseSaved } from '../store/actions';
   templateUrl: './course-dialog.component.html',
   styleUrls: ['./course-dialog.component.css']
 })
-export class CourseDialogComponent implements OnInit {
+export class CourseDialogComponent {
   courseId: number;
   form: FormGroup;
   description: string;
@@ -42,11 +42,7 @@ export class CourseDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
-  }
-
-  save() {
+  save(): void {
     const changes = this.form.value;
 
     this.coursesService.saveCourse(this.courseId, changes)
@@ -61,7 +57,7 @@ export class CourseDialogComponent implements OnInit {
       });
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close();
   }
 }
