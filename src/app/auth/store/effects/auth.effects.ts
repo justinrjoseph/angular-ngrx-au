@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import * as authActions from '../actions';
+import { AuthActionTypes, Login, Logout } from '../actions';
 
 import { defer, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -13,19 +13,17 @@ import { tap } from 'rxjs/operators';
 export class AuthEffects {
   @Effect({ dispatch: false })
   login$ = this.actions$.pipe(
-    ofType<authActions.Login>(authActions.AuthActionTypes.Login),
-    tap((action: authActions.Login) => {
+    ofType<Login>(AuthActionTypes.Login),
+    tap(({ payload }) => {
       const user = localStorage.getItem('user');
 
-      if ( !user ) {
-        localStorage.setItem('user', JSON.stringify(action.payload.user));
-      }
+      if ( !user ) localStorage.setItem('user', JSON.stringify(payload.user));
     })
   );
 
   @Effect({ dispatch: false })
   logout$ = this.actions$.pipe(
-    ofType<authActions.Logout>(authActions.AuthActionTypes.Logout),
+    ofType<Logout>(AuthActionTypes.Logout),
     tap(() => {
       localStorage.removeItem('user');
 
@@ -34,14 +32,11 @@ export class AuthEffects {
   );
 
   @Effect()
-  init$ = defer<authActions.Login | authActions.Logout>(() => {
-    const user = localStorage.getItem('user');
+  init$ = defer<Login | Logout>(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
 
-    if ( user ) {
-      return of(new authActions.Login({ user: JSON.parse(user) }));
-    } else {
-      return of(new authActions.Logout());
-    }
+    if ( user ) return of(new Login({ user }));
+    else return of(new Logout());
   });
 
   constructor(private actions$: Actions, private _router: Router) {}

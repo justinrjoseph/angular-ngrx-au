@@ -48,7 +48,8 @@ export class CourseDialogComponent {
     this.coursesService.saveCourse(this.courseId, changes)
       .subscribe(() => {
         const course: Update<Course> = {
-          id: this.courseId, changes
+          id: this.courseId,
+          changes
         };
 
         this._store.dispatch(new CourseSaved({ course }));

@@ -30,7 +30,7 @@ import { CourseComponent } from './course/course.component';
 import { CourseDialogComponent } from './course-dialog/course-dialog.component';
 
 import * as fromCourses from './store';
-import * as services from './services';
+import * as fromServices from './services';
 
 export const coursesRoutes: Routes = [
   {
@@ -41,7 +41,7 @@ export const coursesRoutes: Routes = [
     path: ':id',
     component: CourseComponent,
     resolve: {
-      course: services.CourseResolver
+      course: fromServices.CourseResolver
     }
   }
 ];
@@ -76,11 +76,7 @@ export const coursesRoutes: Routes = [
     CourseComponent
   ],
   entryComponents: [CourseDialogComponent],
-  providers: [
-    services.CoursesService,
-    services.CourseResolver,
-    services.LessonsDataSource
-  ],
+  providers: [...fromServices.providers],
   exports: [
     HomeComponent,
     CoursesCardListComponent,

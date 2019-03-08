@@ -40,8 +40,10 @@ export class CourseEffects {
   @Effect()
   loadCourse$ = this.actions$.pipe(
     ofType<CourseRequested>(CourseActionTypes.CourseRequested),
-    mergeMap((action: CourseRequested) => {
-      return this._coursesService.findCourseById(action.payload.id);
+    mergeMap(({ payload }) => {
+      const { id } = payload;
+
+      return this._coursesService.findCourseById(id);
     }),
     map((course: Course) => new CourseLoaded({ course }))
   );
@@ -54,7 +56,7 @@ export class CourseEffects {
 
       return this._coursesService.findLessons(courseId, page.index, page.size)
         .pipe(
-          catchError((error) => {
+          catchError(() => {
             this._store.dispatch(new LessonsCancelled());
 
             return of([]);

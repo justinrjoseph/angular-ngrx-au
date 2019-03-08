@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
-import { Course, Lesson, PageQuery } from '../../models';
+import { Course } from '../../models';
 
 export enum CourseActionTypes {
   CourseRequested = '[View Course] Course Requested',

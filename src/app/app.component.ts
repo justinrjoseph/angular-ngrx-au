@@ -17,20 +17,20 @@ import * as fromAuth from './auth/store';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isLoggedIn$: Observable<boolean>;
-  isLoggedOut$: Observable<boolean>;
+  loggedIn$: Observable<boolean>;
+  loggedOut$: Observable<boolean>;
 
   constructor(private _store: Store<AppState>, private _router: Router) {}
 
   ngOnInit() {
-    this.isLoggedIn$ = this._store.select(fromAuth.isLoggedIn)
+    this.loggedIn$ = this._store.select(fromAuth.loggedIn)
       .pipe(
         tap((loggedIn) => {
           if ( loggedIn ) this._router.navigate(['/courses']);
         })
       );
 
-    this.isLoggedOut$ = this._store.select(fromAuth.isLoggedOut);
+    this.loggedOut$ = this._store.select(fromAuth.loggedOut);
   }
 
   logout() {

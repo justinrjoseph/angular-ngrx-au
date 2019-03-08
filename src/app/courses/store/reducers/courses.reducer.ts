@@ -9,16 +9,22 @@ export function coursesReducer(
   action: CourseActions): CoursesState {
   switch ( action.type ) {
     case CourseActionTypes.CourseLoaded:
-      return coursesAdapter.addOne(action.payload.course, state);
+      const { course } = action.payload;
+
+      return coursesAdapter.addOne(course, state);
 
     case CourseActionTypes.AllCoursesLoaded:
-      return coursesAdapter.addAll(action.payload.courses, {
+      const { courses } = action.payload;
+
+      return coursesAdapter.addAll(courses, {
         ...state,
         coursesLoaded: true
       });
 
     case CourseActionTypes.CourseSaved:
-      return coursesAdapter.updateOne(action.payload.course, state);
+      const { course: updatedCourse } = action.payload;
+
+      return coursesAdapter.updateOne(updatedCourse, state);
 
     default:
       return state;

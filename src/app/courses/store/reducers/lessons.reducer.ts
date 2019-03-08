@@ -12,7 +12,9 @@ export function lessonsReducer(
       return { ...state, loading: true };
 
     case LessonActionTypes.LessonsLoaded:
-      return lessonsAdapter.addMany(action.payload.lessons, {
+      const { lessons } = action.payload;
+
+      return lessonsAdapter.addMany(lessons, {
         ...state,
         loading: false,
         lessonsLoaded: true

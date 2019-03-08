@@ -8,17 +8,17 @@ import { AppState } from '../reducers';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { isLoggedIn } from './store';
+import { loggedIn } from './store';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private _store: Store<AppState>, private _router: Router) {}
 
   canActivate(): Observable<boolean> {
-    return this._store.select(isLoggedIn)
+    return this._store.select(loggedIn)
       .pipe(
-        tap((loggedIn: boolean) => {
-          if ( !loggedIn ) this._router.navigate(['/login']);
+        tap((isLoggedIn: boolean) => {
+          if ( !isLoggedIn ) this._router.navigate(['/login']);
         })
       );
   }

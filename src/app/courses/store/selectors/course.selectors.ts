@@ -4,7 +4,7 @@ import { CoursesState } from '../../store/state';
 
 import * as selectors from '../../store/entities';
 
-import { Course } from '../../models';
+import { Course, CourseCategory } from '../../models';
 
 export const selectCoursesState = createFeatureSelector<CoursesState>('courses');
 
@@ -25,12 +25,12 @@ export const allCoursesLoaded = createSelector(
 
 export const beginnerCourses = createSelector(
   allCourses,
-  (courses: Course[]) => filterCourses(courses, 'BEGINNER')
+  (courses: Course[]) => filterCourses(courses, CourseCategory.Beginner)
 );
 
 export const advancedCourses = createSelector(
   allCourses,
-  (courses: Course[]) => filterCourses(courses, 'ADVANCED')
+  (courses: Course[]) => filterCourses(courses, CourseCategory.Advanced)
 );
 
 function filterCourses(courses: Course[], category: string) {

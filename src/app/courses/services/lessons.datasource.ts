@@ -27,13 +27,12 @@ export class LessonsDataSource implements DataSource<Lesson> {
           if ( lessons.length ) this.lessonsSubject.next(lessons);
           else this._store.dispatch(new LessonsRequested({ courseId, page }));
         }),
-        catchError((error) => of([]))
+        catchError(() => of([]))
       )
       .subscribe();
   }
 
   connect(): Observable<Lesson[]> {
-    console.log('Connecting data source');
     return this.lessonsSubject.asObservable();
   }
 
